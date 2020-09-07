@@ -1,0 +1,12 @@
+button span{
+    width:30px;
+    height:3px;
+    background: white;
+    display: block;
+    margin-bottom:5px;
+    margin-top:5px;
+}
+.box-box{
+    border-top: 1px solid #ccc;
+    display: none;
+}

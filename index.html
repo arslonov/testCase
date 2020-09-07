@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Test.uz</title>
+</head>
+<body class=" bg-light">
+    <div class="conatiner">
+       <div class="col-md-6 offset-md-3 mt-5">
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="form-group">
+                    <label class="" for="name">Testni boshlash uchun iltimos ism va familiyangizni kiriting!</label>
+                    <input id="name" type="text" class="form-control" placeholder="Ism Familya">
+                    <button type="button" class="btn btn-success float-right mt-2" id="boshla" disabled>Boshlash</button>
+                </div>
+                
+            </div>
+            <div class=" card-body d-none">
+                <div class="row border-bottom">
+                    <div class="col-md-3 border-right">
+                        Savol
+                    </div>
+                    <div class="col-md-9">
+                        <p class="savol"></p>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-3 border-right">
+                        Variantlar
+                    </div>
+                    <div class="col-md-9">
+                        <div>
+                            <input type="radio" id="a" name="test" >
+                            <label for="a" id="ajavob"></label>
+                        </div>
+                        
+                        <div>
+                            <input type="radio" id="b" name="test" >
+                            <label for="b" id="bjavob"></label>
+                        </div>
+                        
+                        <div>
+                            <input type="radio" id="c" name="test" >
+                            <label for="c" id="cjavob"></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="d" name="test" >
+                            <label id="djavob" for="d"></label>
+                        </div>
+                        <div class="alert alert-success alert-dismissible d-none">
+                            Barakalla!😀😀😀
+                          </div>
+                          <div class="alert alert-danger d-none">
+                            Afsus😕😕😕
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" card-footer d-none">
+                <button type="button" class="btn btn-light" id="prev" disabled>Oldingi</button>
+                <button type="button" class="btn btn-success offset-md-3" id="check">Tekshir</button>
+                <button type="button" class="btn btn-light offset-md-4" id="next">Keyingi</button>
+            </div>
+        </div>
+       </div>
+    </div>
+</body>
+    <script src="js/jQuery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript">
+        var savol=["O'zbekiston necha yoshda?","Tojikiston necha yoshda?","Qozoqiston necha yoshda?"]
+        var javob=["28","26","27","29","29","26","27","28","28","27","30","29"]
+        var tjavob=["29","29","30"]
+        $("#name").keyup(function(){
+            var fam = $("#name").val();
+            if(fam == ''){
+            $("#boshla").prop("disabled",true);
+            }
+            else{
+                $("#boshla").prop("disabled",false);
+            }
+        })
+       
+        var i=-1,j=0,count=0;    
+        $("#boshla").click(function(){
+            var fam = $("#name").val();
+            console.log(fam);
+            $(".card-footer").removeClass("d-none");
+            $(".card-body").removeClass("d-none");
+            $(".form-group").addClass("d-none");
+            $(".card-header").html("<h4> Foydalanuvchi : "+ fam +"</h4>");
+            i++;
+            $(".savol").html(savol[i]);
+            
+            $("#ajavob").html(javob[j]); $("#a").val(javob[j%4]); j++;
+            $("#bjavob").html(javob[j]); $("#b").val(javob[j%4]); j++;
+            $("#cjavob").html(javob[j]); $("#c").val(javob[j%4]); j++;
+            $("#djavob").html(javob[j]); $("#d").val(javob[j%4]); j++;
+        })
+        $("#prev").click(function(){
+            if(count==1){
+                $(".alert-success").addClass("d-none");
+                count=0;
+            }
+            if(count==2){
+                $(".alert-danger").addClass("d-none");
+                count=0;
+            }
+            i--;
+            $(".savol").html(savol[i]);
+            
+            j-=4;
+            $("#ajavob").html(javob[j]); $("#a").val(javob[j%4]); j++;
+            $("#bjavob").html(javob[j]); $("#b").val(javob[j%4]); j++;
+            $("#cjavob").html(javob[j]); $("#c").val(javob[j%4]); j++;
+            $("#djavob").html(javob[j]); $("#d").val(javob[j%4]); j++;
+            if(i==0){
+                $("#prev").prop("disabled",true);
+            }
+            else{
+                $("#prev").prop("disabled",false);
+            }
+            if(i==savol.length-1){
+                $("#next").prop("disabled",true);
+            }
+            else{
+                $("#next").prop("disabled",false);
+            }
+        })
+        $("#next").click(function(){
+            if(count==1){
+                $(".alert-success").addClass("d-none");
+                count=0;
+            }
+            if(count==2){
+                $(".alert-danger").addClass("d-none");
+                count=0;
+            }
+            i++;
+            $(".savol").html(savol[i]);
+            
+            $("#bjavob").html(javob[j]); $("#a").val(javob[j%4]); j++;
+            $("#ajavob").html(javob[j]); $("#b").val(javob[j%4]); j++;
+            $("#cjavob").html(javob[j]); $("#c").val(javob[j%4]); j++;
+            $("#djavob").html(javob[j]); $("#d").val(javob[j%4]); j++;
+            if(i==savol.length-1){
+                $("#next").prop("disabled",true);
+            }
+            else{
+                $("#next").prop("disabled",false);
+            }
+            if(i==0){
+                $("#prev").prop("disabled",true);   
+            }
+            else{
+                $("#prev").prop("disabled",false);
+            }
+        })
+        $("#check").click(function(){
+            if(tjavob[i]==$("input[name='test']:checked").val()){
+                $(".alert-success").removeClass("d-none");
+                count=1;
+            }
+            else{
+                $(".alert-danger").removeClass("d-none");
+                count=2;
+            }
+        })
+    </script>
+</html>
